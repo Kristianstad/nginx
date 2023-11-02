@@ -38,7 +38,22 @@ ENV VAR_CONFIG_DIR="/etc/nginx" \
     VAR_LINUX_USER="nginx" \
     VAR_FINAL_COMMAND="nginx -g 'daemon off;'" \
     VAR_main1_error_log="stderr info" \
-    VAR_main2_worker_rlimit_nofile="2048"
+    VAR_main2_worker_rlimit_nofile="2048" \
+    VAR_server1_listen="8080 default_server" \
+    VAR_server2_listen="[::]:8080 default_server" \
+    VAR_server3_access_log="off" \
+    VAR_server4_client_max_body_size="0" \
+    VAR_server5_sendfile="on" \
+    VAR_server6_sendfile_max_chunk="1m" \
+    VAR_server7_tcp_nopush="on" \
+    VAR_server8_tcp_nodelay="on" \
+    VAR_server9_gzip="on" \
+    VAR_server10_gzip_vary="off" \
+    VAR_server11_gzip_min_length="10240" \
+    VAR_server12_gzip_proxied="any" \
+    VAR_server13_gzip_types="text/plain text/css text/xml text/javascript application/javascript application/x-javascript application/xml application/json" \
+    VAR_server14_root="/www" \
+    VAR_server15_index="index.html"
 
 # Generic template (don't edit) <BEGIN>
 USER starter
