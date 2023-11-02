@@ -7,12 +7,13 @@
 
 if [ "$isFirstRun" == "true" ]
 then
-   if [ ! -s "$VAR_CONFIG_DIR/conf.d/default.conf" ]
-   then
-      createConfdDefault
-   fi
-   if [ ! -s "$VAR_CONFIG_DIR/http.d/default.conf" ]
-   then
-      createHttpdDefault
-   fi
+	mkdir
+	if [ ! -s "$VAR_CONFIG_DIR/conf.d/default.conf" ]
+	then
+		createConfdDefault
+	fi
+	if [ ! -s "$VAR_CONFIG_DIR/http.d/default.conf" ]
+	then
+		createHttpdDefault
+	fi
 fi
