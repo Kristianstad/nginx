@@ -1,5 +1,5 @@
 createConfdDefault(){
-	local confddefault_begin=""
-	local confddefault_end=";"
-	configFromVarGroup confddefault > "$VAR_CONFIG_DIR/conf.d/default.conf"
+	local main_begin=""
+	local main_end=";"
+	configFromVarGroup main > "$VAR_CONFIG_DIR/conf.d/default.conf"
 }
