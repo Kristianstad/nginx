@@ -54,7 +54,7 @@ ENV VAR_CONFIG_DIR="/etc/nginx" \
     VAR_server13_gzip_types="text/plain text/css text/xml text/javascript application/javascript application/x-javascript application/xml application/json" \
     VAR_server14_root="/www" \
     VAR_server15_index="index.html" \
-    VAR_location1="/ { try_files $uri $uri/ =404; }"
+    VAR_location1_="/ { try_files $uri $uri/ =404; }"
 
 # Generic template (don't edit) <BEGIN>
 USER starter
