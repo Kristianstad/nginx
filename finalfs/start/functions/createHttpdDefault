@@ -1,0 +1,5 @@
+createHttpdDefault(){
+	local httpddefault_begin=""
+	local httpddefault_end=";"
+	configFromVarGroup httpddefault > "$VAR_CONFIG_DIR/http.d/default.conf"
+}
