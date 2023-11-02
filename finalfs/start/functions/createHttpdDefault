@@ -1,5 +1,8 @@
 createHttpdDefault(){
-	local httpddefault_begin=""
-	local httpddefault_end=";"
-	configFromVarGroup httpddefault > "$VAR_CONFIG_DIR/http.d/default.conf"
+	local file="$VAR_CONFIG_DIR/http.d/default.conf"
+	local server_begin=""
+	local server_end=";"
+	echo -e "server {" > "$file"
+	configFromVarGroup server >> "$file"
+	echo -e "}\n" >> "$file"
 }
