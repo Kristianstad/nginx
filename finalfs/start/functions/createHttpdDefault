@@ -2,7 +2,7 @@ createHttpdDefault(){
 	local file="$VAR_CONFIG_DIR/http.d/default.conf"
 	local server_begin=""
 	local server_end=";"
-	local location_begin=""
+	local location_begin="location"
 	local location_end=""
 	echo -e "server {" > "$file"
 	configFromVarGroup server >> "$file"
