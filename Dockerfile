@@ -6,7 +6,7 @@ ARG SaM_REPO=${SaM_REPO:-ghcr.io/kristianstad/secure_and_minimal}
 ARG ALPINE_VERSION=${ALPINE_VERSION:-3.18}
 ARG IMAGETYPE="application"
 ARG RUNDEPS="nginx"
-ARG MAKEDIRS="/var/log/nginx /usr/lib/nginx/modules /var/lib/nginx/tmp /run/nginx"
+ARG MAKEDIRS="/var/log/nginx /usr/lib/nginx/modules /var/lib/nginx/tmp /run/nginx /etc/nginx/http.d"
 ARG FINALCMDS=\
 "   sed -i '/worker_processes auto|user nginx/d' /etc/nginx/nginx.conf "\
 "&& find /var -user 185 -exec chown 0:0 {} \;"
