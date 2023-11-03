@@ -8,7 +8,7 @@ ARG IMAGETYPE="application"
 ARG RUNDEPS="nginx"
 ARG MAKEDIRS="/var/log/nginx /usr/lib/nginx/modules /var/lib/nginx/tmp /run/nginx /etc/nginx/http.d"
 ARG FINALCMDS=\
-"   sed -i '/worker_processes auto|user nginx/d' /etc/nginx/nginx.conf "\
+"   sed -i '/worker_processes auto/d;/user nginx/d' /etc/nginx/nginx.conf "\
 "&& find /var -user 185 -exec chown 0:0 {} \;"
 ARG REMOVEFILES="/etc/nginx/http.d/default.conf"
 ARG LINUXUSEROWNED="/var/log/nginx /usr/lib/nginx/modules /var/lib/nginx/tmp /run/nginx"
