@@ -39,9 +39,10 @@ COPY --from=build /finalfs /
 # =========================================================================
 ENV VAR_CONFIG_DIR="/etc/nginx" \
     VAR_LINUX_USER="nginx" \
-    VAR_FINAL_COMMAND="nginx -g 'daemon off;'" \
-    VAR_main1_error_log="stderr info" \
-    VAR_main2_worker_rlimit_nofile="2048" \
+    VAR_LOG_LEVEL="info" \
+    VAR_WORKER_PROCESSES="1" \
+    VAR_WORKER_RLIMIT_NOFILE="2048" \
+    VAR_FINAL_COMMAND="nginx -g 'daemon off; user \$VAR_LINUX_USER; error_log stderr \$VAR_LOG_LEVEL; worker_processes \$VAR_WORKER_PROCESSES; worker_rlimit_nofile \$VAR_WORKER_RLIMIT_NOFILE;'" \
     VAR_server01_listen="8080 default_server" \
     VAR_server02_listen="[::]:8080 default_server" \
     VAR_server03_access_log="off" \
