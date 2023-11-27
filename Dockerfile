@@ -58,6 +58,9 @@ ENV VAR_CONFIG_DIR="/etc/nginx" \
     VAR_server13_gzip_types="text/plain text/css text/xml text/javascript application/javascript application/x-javascript application/xml application/json" \
     VAR_server14_root="/www" \
     VAR_server15_index="index.html" \
+#   VAR_server16_proxy_busy_buffers_size="512k" \
+#   VAR_server17_proxy_buffers="4 512k" \
+#   VAR_server18_proxy_buffer_size="256k" \
     VAR_serversub01_location="/ {  }"
 
 # Generic template (don't edit) <BEGIN>
