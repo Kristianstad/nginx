@@ -3,7 +3,7 @@
 # =========================================================================
 # ARGs (can be passed to Build/Final) <BEGIN>
 ARG SaM_REPO=${SaM_REPO:-ghcr.io/kristianstad/secure_and_minimal}
-ARG ALPINE_VERSION=${ALPINE_VERSION:-3.19}
+ARG ALPINE_VERSION=${ALPINE_VERSION:-3.20}
 ARG IMAGETYPE="application"
 ARG RUNDEPS="nginx"
 ARG MAKEDIRS="/var/log/nginx /usr/lib/nginx/modules /var/lib/nginx/tmp /run/nginx /etc/nginx/http.d"
