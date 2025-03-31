@@ -7,6 +7,7 @@
 
 if [ "$isFirstRun" == "true" ]
 then
+	chown $VAR_LINUX_USER /var/lib/nginx
 	if [ ! -s "$VAR_CONFIG_DIR/http.d/default.conf" ]
 	then
 		createHttpdDefault
