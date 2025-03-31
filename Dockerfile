@@ -6,11 +6,11 @@ ARG SaM_REPO=${SaM_REPO:-ghcr.io/kristianstad/secure_and_minimal}
 ARG ALPINE_VERSION=${ALPINE_VERSION:-3.21}
 ARG IMAGETYPE="application"
 ARG RUNDEPS="nginx"
-ARG MAKEDIRS="/var/log/nginx /usr/lib/nginx/modules /run/nginx /etc/nginx/http.d"
+ARG MAKEDIRS="/var/log/nginx /usr/lib/nginx/modules /run/nginx /etc/nginx/http.d /var/lib/nginx/tmp"
 ARG FINALCMDS=\
 "   sed -i '/worker_processes auto/d;/user nginx/d' /etc/nginx/nginx.conf "\
 "&& find /var -user 185 -exec chown 0:0 {} \;"\
-"&& mkdir -m 777 /var/lib/nginx/tmp"
+"&& chmod 777 /var/lib/nginx/tmp"
 ARG REMOVEFILES="/etc/nginx/http.d/default.conf"
 ARG LINUXUSEROWNED="/var/log/nginx /usr/lib/nginx/modules /run/nginx"
 ARG STARTUPEXECUTABLES="/usr/sbin/nginx"
