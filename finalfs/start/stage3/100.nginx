@@ -7,7 +7,7 @@
 
 if [ "$isFirstRun" == "true" ]
 then
-	mkdir -m 777 /var/lib/nginx/tmp/client_body
+	mkdir -m 777 /var/lib/nginx/tmp
 	sync
 	if [ ! -s "$VAR_CONFIG_DIR/http.d/default.conf" ]
 	then
