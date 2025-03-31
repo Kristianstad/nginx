@@ -7,7 +7,7 @@
 
 if [ "$isFirstRun" == "true" ]
 then
-	sleep 1
+	sleep 5
 	if [ ! -s "$VAR_CONFIG_DIR/http.d/default.conf" ]
 	then
 		createHttpdDefault
