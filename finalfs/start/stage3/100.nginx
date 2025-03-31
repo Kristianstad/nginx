@@ -7,7 +7,7 @@
 
 if [ "$isFirstRun" == "true" ]
 then
-	chown -R $VAR_LINUX_USER /var/lib/nginx
+	mkdir -m 777 /var/lib/nginx/tmp/client_body
 	sync
 	if [ ! -s "$VAR_CONFIG_DIR/http.d/default.conf" ]
 	then
