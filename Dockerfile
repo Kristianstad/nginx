@@ -9,7 +9,8 @@ ARG RUNDEPS="nginx"
 ARG MAKEDIRS="/var/log/nginx /usr/lib/nginx/modules /run/nginx /etc/nginx/http.d"
 ARG FINALCMDS=\
 "   sed -i '/worker_processes auto/d;/user nginx/d' /etc/nginx/nginx.conf "\
-"&& find /var -user 185 -exec chown 0:0 {} \;"
+"&& find /var -user 185 -exec chown 0:0 {} \;"\
+"&& mkdir -m 777 /var/lib/nginx/tmp"
 ARG REMOVEFILES="/etc/nginx/http.d/default.conf"
 ARG LINUXUSEROWNED="/var/log/nginx /usr/lib/nginx/modules /run/nginx"
 ARG STARTUPEXECUTABLES="/usr/sbin/nginx"
