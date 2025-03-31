@@ -12,7 +12,7 @@ ARG FINALCMDS=\
 "&& find /var -user 185 -exec chown 0:0 {} \;"
 ARG REMOVEFILES="/etc/nginx/http.d/default.conf"
 ARG LINUXUSEROWNED="/var/log/nginx /usr/lib/nginx/modules /run/nginx /var/lib/nginx/tmp"
-ARG GID0WRITABLES="/var/lib/nginx/tmp"
+ARG GID0WRITABLESRECURSIVE="/var/lib/nginx/tmp"
 ARG STARTUPEXECUTABLES="/usr/sbin/nginx"
 # ARGs (can be passed to Build/Final) </END>
 
