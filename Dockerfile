@@ -57,11 +57,11 @@ ENV VAR_CONFIG_DIR="/etc/nginx" \
     VAR_server12_gzip_min_length="10240" \
     VAR_server13_gzip_proxied="any" \
     VAR_server14_gzip_types="text/plain text/css text/xml text/javascript application/javascript application/x-javascript application/xml application/json application/xml+rss" \
-    VAR_server15_gzip_static="on" \
-    VAR_server16_brotli="on" \
-    VAR_server17_brotli_static="on" \
-    VAR_server18_root="/www" \
-    VAR_server19_index="index.html" \
+    VAR_server15_root="/www" \
+    VAR_server16_index="index.html" \
+    VAR_server17_gzip_static="on" \
+    VAR_server18_brotli="on" \
+    VAR_server19_brotli_static="on" \
     VAR_serversub01_location="/ {  }"
 
 # Generic template (don't edit) <BEGIN>
