@@ -5,7 +5,7 @@
 ARG SaM_REPO=${SaM_REPO:-ghcr.io/kristianstad/secure_and_minimal}
 ARG ALPINE_VERSION=${ALPINE_VERSION:-3.22}
 ARG IMAGETYPE="application"
-ARG RUNDEPS="nginx"
+ARG RUNDEPS="nginx nginx-mod-http-brotli"
 ARG MAKEDIRS="/var/log/nginx /usr/lib/nginx/modules /run/nginx /etc/nginx/http.d /var/lib/nginx/tmp"
 ARG FINALCMDS=\
 "   sed -i '/worker_processes auto/d;/user nginx/d' /etc/nginx/nginx.conf "\
