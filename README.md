@@ -27,6 +27,9 @@ Nginx, running on Alpine. Configuration is set by given VAR-variables. Listens o
 * VAR_server14_gzip_types="text/plain text/css text/xml text/javascript application/javascript application/x-javascript application/xml application/json application/xml+rss"
 * VAR_server15_root="/www"
 * VAR_server16_index="index.html"
+* VAR_server17_brotli="off"
+* VAR_server18_brotli_static="on"
+* VAR_server19_gzip_static="on"
 * VAR_serversub01_location="/ {  }"
 
 ## Capabilities
