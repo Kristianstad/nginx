@@ -4,7 +4,7 @@
 # ARGs (can be passed to Build/Final) <BEGIN>
 ARG SaM_REPO=${SaM_REPO:-ghcr.io/kristianstad/secure_and_minimal}
 ARG ALPINE_VERSION=${ALPINE_VERSION:-3.23}
-ARG APP_VERSION=${APP_VERSION:-1.27.0}
+ARG APP_VERSION=${APP_VERSION:-1.28.3}
 ARG IMAGETYPE="application"
 ARG RUNDEPS="nginx nginx-mod-http-brotli"
 ARG MAKEDIRS="/var/log/nginx /usr/lib/nginx/modules /run/nginx /etc/nginx/http.d /var/lib/nginx/tmp"
@@ -76,4 +76,4 @@ ONBUILD USER root
 
 LABEL org.opencontainers.image.version="${APP_VERSION}" \
       org.opencontainers.image.title="nginx" \
-      org.opencontainers.image.description="Nginx ${APP_VERSION} with brotli support based on secure_and_minimal"
+      org.opencontainers.image.description="Nginx ${APP_VERSION} with brotli support based on secure_and_minimal ${ALPINE_VERSION}"
