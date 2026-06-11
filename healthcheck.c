@@ -1,24 +1,79 @@
-#include <sys/socket.h>
+/*
+ * healthcheck.c — minimal HTTP health check for nginx (Alpine/musl)
+ *
+ * Usage: healthcheck [port] [path]
+ *   Default: healthcheck 80 /health
+ *
+ * Exits 0 if nginx responds with HTTP 2xx or 3xx, 1 otherwise.
+ * Compile: gcc -static -O2 -o healthcheck healthcheck.c
+ */
+
+#include <arpa/inet.h>
 #include <netinet/in.h>
-#include <unistd.h>
+#include <stdio.h>
 #include <stdlib.h>
-#include <signal.h>
+#include <string.h>
+#include <sys/socket.h>
+#include <unistd.h>
 
-int main(int argc, char **argv) {
-    int port = 8080;
+#define HOST         "127.0.0.1"
+#define DEFAULT_PORT  8080
+#define DEFAULT_PATH  "/health"
+#define TIMEOUT_SEC   5
+#define BUFSIZE       512
 
-    signal(SIGALRM, SIG_DFL);
-    alarm(3);
+int main(int argc, char *argv[])
+{
+    int         port = DEFAULT_PORT;
+    const char *path = DEFAULT_PATH;
 
-    int s = socket(AF_INET, SOCK_STREAM, 0);
-    if (s < 0) return 1;
+    if (argc > 1) port = atoi(argv[1]);
+    if (argc > 2) path = argv[2];
 
-    struct sockaddr_in a = {0};
-    a.sin_family      = AF_INET;
-    a.sin_port        = htons((unsigned short)port);
-    a.sin_addr.s_addr = htonl(INADDR_LOOPBACK);
+    int fd = socket(AF_INET, SOCK_STREAM, 0);
+    if (fd < 0) return 1;
 
-    int r = connect(s, (struct sockaddr *)&a, sizeof(a));
-    close(s);
-    return r == 0 ? 0 : 1;
+    /* Timeout gäller send/recv — connect mot localhost är i praktiken omedelbart */
+    struct timeval tv = { .tv_sec = TIMEOUT_SEC, .tv_usec = 0 };
+    setsockopt(fd, SOL_SOCKET, SO_RCVTIMEO, &tv, sizeof(tv));
+    setsockopt(fd, SOL_SOCKET, SO_SNDTIMEO, &tv, sizeof(tv));
+
+    struct sockaddr_in addr = {
+        .sin_family      = AF_INET,
+        .sin_port        = htons((uint16_t)port),
+        .sin_addr.s_addr = inet_addr(HOST),
+    };
+
+    if (connect(fd, (struct sockaddr *)&addr, sizeof(addr)) < 0) {
+        close(fd);
+        return 1;
+    }
+
+    char req[256];
+    int  reqlen = snprintf(req, sizeof(req),
+        "GET %s HTTP/1.0\r\n"
+        "Host: localhost\r\n"
+        "Connection: close\r\n"
+        "\r\n",
+        path);
+
+    if (send(fd, req, (size_t)reqlen, 0) != (ssize_t)reqlen) {
+        close(fd);
+        return 1;
+    }
+
+    char    buf[BUFSIZE];
+    ssize_t n = recv(fd, buf, sizeof(buf) - 1, 0);
+    close(fd);
+
+    /* Minsta möjliga svar: "HTTP/1.0 200 OK\r\n..." = 17 tecken */
+    if (n < 12) return 1;
+    buf[n] = '\0';
+
+    /* Parsa statuskoden från "HTTP/1.x NNN ..." */
+    char *sp = strchr(buf, ' ');
+    if (!sp) return 1;
+
+    int status = atoi(sp + 1);
+    return (status >= 200 && status < 400) ? 0 : 1;
 }
