@@ -19,7 +19,7 @@
 #include <unistd.h>
 
 #define DEFAULT_HOST  "127.0.0.1"
-#define DEFAULT_PORT   8080
+#define DEFAULT_PORT   80
 #define DEFAULT_PATH   "/health"
 #define TIMEOUT_SEC    5
 #define BUFSIZE        512
@@ -38,7 +38,9 @@ int main(int argc, char *argv[])
     if (fd < 0) return 1;
 
     /* Timeout gäller send/recv — connect mot localhost är i praktiken omedelbart */
-    struct timeval tv = { .tv_sec = TIMEOUT_SEC, .tv_usec = 0 };
+    struct timeval tv;
+    tv.tv_sec  = TIMEOUT_SEC;
+    tv.tv_usec = 0;
     setsockopt(fd, SOL_SOCKET, SO_RCVTIMEO, &tv, sizeof(tv));
     setsockopt(fd, SOL_SOCKET, SO_SNDTIMEO, &tv, sizeof(tv));
 
