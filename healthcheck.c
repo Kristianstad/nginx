@@ -19,7 +19,7 @@
 #include <unistd.h>
 
 #define DEFAULT_HOST  "127.0.0.1"
-#define DEFAULT_PORT   80
+#define DEFAULT_PORT   8080
 #define DEFAULT_PATH   "/health"
 #define TIMEOUT_SEC    5
 #define BUFSIZE        512
