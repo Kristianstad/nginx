@@ -6,6 +6,11 @@ ARG SaM_REPO=${SaM_REPO:-ghcr.io/kristianstad/secure_and_minimal}
 ARG ALPINE_VERSION=${ALPINE_VERSION:-3.23}
 ARG APP_VERSION=${APP_VERSION:-1.28.3}
 ARG IMAGETYPE="application"
+ARG BUILDCMDS=\
+"   gcc -static -O2 -o /tmp/healthcheck /tmp/healthcheck.c "\
+"&& strip --strip-all /tmp/healthcheck "\
+"&& chmod ugo+rx-w /tmp/healthcheck "\
+"&& cp -a /tmp/healthcheck /finalfs/usr/local/bin/"
 ARG RUNDEPS="nginx nginx-mod-http-brotli"
 ARG MAKEDIRS="/var/log/nginx /usr/lib/nginx/modules /run/nginx /etc/nginx/http.d /var/lib/nginx/tmp"
 ARG FINALCMDS=\
@@ -34,6 +39,7 @@ FROM ${BUILDIMAGE:-$SaM_REPO:build-${ALPINE_VERSION}} AS build
 FROM ${BASEIMAGE:-$SaM_REPO:base-${ALPINE_VERSION}} AS final
 COPY --from=build /finalfs /
 # Generic template (don't edit) </END>
+COPY ./healthcheck.c /tmp/
 
 # =========================================================================
 # Final
