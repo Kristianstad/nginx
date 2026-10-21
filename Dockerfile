@@ -73,6 +73,7 @@ ENV VAR_CONFIG_DIR="/etc/nginx" \
     VAR_server17_brotli="off" \
     VAR_server18_brotli_static="on" \
     VAR_server19_gzip_static="on" \
+    VAR_server20_absolute_redirect="off" \
     VAR_serversub01_location="/ {  }" \
     VAR_serversub02_location='= /health { access_log off; return 200 "OK"; add_header Content-Type text/plain; }'
 
