@@ -3,8 +3,8 @@
 # =========================================================================
 # ARGs (can be passed to Build/Final) <BEGIN>
 ARG SaM_REPO=${SaM_REPO:-ghcr.io/kristianstad/secure_and_minimal}
-ARG ALPINE_VERSION=${ALPINE_VERSION:-3.23}
-ARG APP_VERSION=${APP_VERSION:-1.28.3-r7}
+ARG ALPINE_VERSION=${ALPINE_VERSION:-3.24}
+ARG APP_VERSION=${APP_VERSION:-1.30.4}
 ARG IMAGETYPE="application"
 ARG BUILDCMDS=\
 "   gcc -static -O2 -o /tmp/healthcheck /tmp/healthcheck.c "\
